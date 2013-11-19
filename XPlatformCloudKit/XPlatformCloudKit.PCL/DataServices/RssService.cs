@@ -84,7 +84,6 @@ namespace XPlatformCloudKit.DataServices
                         // Bust the cache.
                         url = Misc.CacheBusterUrl(url);
 
-
                     string RemoteRssFile = await httpClient.GetStringAsync(url);
 
                     if (!String.IsNullOrWhiteSpace(RemoteRssFile))

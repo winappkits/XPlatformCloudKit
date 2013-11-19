@@ -53,10 +53,10 @@ namespace XPlatformCloudKit
          *  The first field should be a valid RSS URL and the second field should be the group name
          *  you want the feed assigned to.
          *
-         * Here's an example of sample remote RSS feed file with two YouTube channels, and a single common group.
+         * Here's an example of a sample remote RSS feed file with two YouTube channels, and a single common group.
          * 
-         *  https://gdata.youtube.com/feeds/api/users/TheWindotnet/uploads?orderby=updated, "Remote RSS Feed Example"
-         *  https://gdata.youtube.com/feeds/api/users/roschler/uploads?orderby=updated, "Remote RSS Feed Example"
+         *  https://gdata.youtube.com/feeds/api/users/TheWindotnet/uploads?orderby=updated&alt=rss, "Remote RSS Feed Example"
+         *  https://gdata.youtube.com/feeds/api/users/roschler/uploads?orderby=updated&alt=rss, "Remote RSS Feed Example"
          *
          * Make sure EnableRssService to set to TRUE or the remote content (or the RSS feeds below) will 
          *  not be accessed.  Leave RemoteRssSourceUrl blank if you do not want to use the remote RSS

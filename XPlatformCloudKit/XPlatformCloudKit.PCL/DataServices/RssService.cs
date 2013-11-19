@@ -14,6 +14,9 @@ using System.IO;
 using System.Xml.Linq;
 using XPlatformCloudKit.Services;
 using System.Text.RegularExpressions;
+using XPlatformCloudKit.Common;
+using System.Diagnostics;
+
 namespace XPlatformCloudKit.DataServices
 {
     class RssService : IDataService
@@ -21,13 +24,84 @@ namespace XPlatformCloudKit.DataServices
         HttpClient httpClient = new HttpClient();
         List<Item> RssData;
 
+        /// <summary>
+        /// Remove any whitespace or quotes from an RssSource field.
+        /// </summary>
+        private string cleanField(string strFld)
+        {
+            return (strFld.Trim().Trim('"'));
+        }
+
+        /// <summary>
+        /// Parse a string that should contain a URL/group name pair into an RssSource object.
+        /// </summary>
+        private RssSource stringToRssSource(string str)
+        {
+            string[] fields = str.Split(',');
+
+            if (fields.Length != 2)
+                // Invalid remote RSS source line.
+                throw new FormatException("The following line is not a valid RSS source line (invalid field count): " + str);
+
+            string theUrl = cleanField(fields[0]);
+            string theGroup = cleanField(fields[1]);
+
+            if (String.IsNullOrWhiteSpace(theUrl))
+                throw new FormatException("The following line is not a valid RSS source line (URL field is empty): " + str);
+
+            if (String.IsNullOrWhiteSpace(theGroup))
+                throw new FormatException("The following line is not a valid RSS source line (Group field is empty): " + str);
+
+            // YouTube gdata feeds are in ATOM format by default, which we can not parse.  If the RSS URL argument is missing,
+            //  flag the error.
+            if (theUrl.Contains("gdata.youtube.com") && (!theUrl.ContainsIgnoreCase("alt=rss")))
+                throw new FormatException("Found a YouTube API feed that returns the default ATOM format, which we can not parse.  Append 'alt=rss' (lowercase) to the URL to fix this problem if applicable.");
+
+            return new RssSource() { Url = theUrl, Group = theGroup };
+        }
+
         public async Task<List<Item>> GetItems()
         {
             try
             {
                 RssData = new List<Item>();
 
-                foreach (var rssSource in AppSettings.RssAddressCollection)
+                // Copy the RSS feeds in the AppSettings.RssAddressCollection into a local list.
+                List<RssSource> listRssSources = new List<RssSource>();
+
+                listRssSources.AddRange(AppSettings.RssAddressCollection.ToList());
+
+                // Do we have a URL for remote list of additional RSS feeds?
+                if (!String.IsNullOrWhiteSpace(AppSettings.RemoteRssSourceUrl))
+                {
+                    // Yes retrieve the list. If we are in the debugger, then make sure that 
+                    //  the phone or emulator does not cache the URL.  That way we always get
+                    //  the latest contents, which is important when iteratively modifying
+                    //  the remote RSS source list.
+                    string url = AppSettings.RemoteRssSourceUrl;
+
+                    if (Debugger.IsAttached)
+                        // Bust the cache.
+                        url = Misc.CacheBusterUrl(url);
+
+
+                    string RemoteRssFile = await httpClient.GetStringAsync(url);
+
+                    if (!String.IsNullOrWhiteSpace(RemoteRssFile))
+                    {
+                        // Parse the file into a list of strings.  Split by either carraige return, or
+                        //  line feed to account for platform  differences in the platform that created 
+                        //  the remote RSS feeds list file.  
+                        string[] arrayCRLF = { "\r", "\n" };
+                        string[] RemoteRssSources = RemoteRssFile.Split(arrayCRLF, StringSplitOptions.RemoveEmptyEntries);
+
+                        // Now parse each additional feed and add it to the master collection.
+                        foreach (string rssSourceAsStr in RemoteRssSources)
+                            listRssSources.Add(stringToRssSource(rssSourceAsStr));
+                    }
+                }
+
+                foreach (var rssSource in listRssSources)
                 {
                     await Parse(rssSource);
                 }

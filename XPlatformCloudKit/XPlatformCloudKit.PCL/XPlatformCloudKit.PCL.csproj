@@ -44,6 +44,7 @@
     <Compile Include="App.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="Common\BindableBase.cs" />
+    <Compile Include="Common\Misc.cs" />
     <Compile Include="DataServices\LocalItemsFileService.cs" />
     <Compile Include="Helpers\AppState.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
@@ -91,7 +92,8 @@
       <HintPath>..\packages\WindowsAzure.MobileServices.1.0.2\lib\portable-win+net45+sl40+wp71\Microsoft.WindowsAzure.Mobile.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.13\lib\portable-net40+sl4+win8+wp71\System.Net.Http.dll</HintPath>

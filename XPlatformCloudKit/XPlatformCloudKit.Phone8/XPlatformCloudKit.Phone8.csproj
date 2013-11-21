@@ -101,6 +101,9 @@
     <Compile Include="..\XPlatformCloudKit.Win8\Helpers\DispatcherHelper.cs">
       <Link>Helpers\DispatcherHelper.cs</Link>
     </Compile>
+    <Compile Include="..\XPlatformCloudKit.Win8\Services\AzureMobileServiceAuthenticator.cs">
+      <Link>Services\AzureMobileServiceAuthenticator.cs</Link>
+    </Compile>
     <Compile Include="..\XPlatformCloudKit.Win8\Services\LiveTileNotifyService.cs">
       <Link>Services\LiveTileNotifyService.cs</Link>
     </Compile>
@@ -122,11 +125,11 @@
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\InitView.xaml.cs">
+      <DependentUpon>InitView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ItemDescriptionView.xaml.cs">
       <DependentUpon>ItemDescriptionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ItemsShowcaseView.xaml.cs">
-      <DependentUpon>ItemsShowcaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
@@ -134,19 +137,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\ItemsShowcaseView.xaml.cs">
+      <DependentUpon>ItemsShowcaseView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Views\InitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ItemDescriptionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ItemsShowcaseView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

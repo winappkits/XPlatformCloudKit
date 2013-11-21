@@ -17,7 +17,17 @@ namespace XPlatformCloudKit.DataServices
     {
         private IMobileServiceTable<Item> itemsTable;
         private List<Item> Items;
-        public MobileServiceClient MobileServiceClient;
+
+        public MobileServiceClient MobileServiceClient
+        {
+            get
+            {
+                return new MobileServiceClient(
+                        AppSettings.MobileServiceAddress,
+                        AppSettings.MobileServiceApplicationKey
+                );
+            }
+        }
 
         public AzureMobileService()
         {
@@ -25,11 +35,6 @@ namespace XPlatformCloudKit.DataServices
             {
                 try
                 {
-                    MobileServiceClient = new MobileServiceClient(
-                                     AppSettings.MobileServiceAddress,
-                                     AppSettings.MobileServiceApplicationKey
-                            );
-
                     itemsTable = MobileServiceClient.GetTable<Item>();
 
                     if (AppSettings.CreateInitialSchemaForAzureMobileService)

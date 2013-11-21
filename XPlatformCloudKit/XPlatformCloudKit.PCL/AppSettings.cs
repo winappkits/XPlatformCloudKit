@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.WindowsAzure.MobileServices;
 using XPlatformCloudKit.DataServices;
 using XPlatformCloudKit.Models;
 
@@ -26,7 +27,7 @@ namespace XPlatformCloudKit
         #endregion
 
         #region AzureMobileService Settings
-        public const bool EnableAzureMobileService = true;  //Use Mobile Service located @ MobileServiceAddress with Key set to MobileServiceApplicationKey
+        public const bool EnableAzureMobileService = false;  //Use Mobile Service located @ MobileServiceAddress with Key set to MobileServiceApplicationKey
 
         //Mark true to create the Initial Schema if you are running for the first time against a brand new Mobile Service
         //Be sure you have created a table named "Item" and have permission to update with app key
@@ -40,6 +41,13 @@ namespace XPlatformCloudKit
         //You Azure Mobile Service Key 
         //i.e. UYZnUrrabofKBELSRdRsmCGboyDGMJ15
         public const string MobileServiceApplicationKey = "UYZnUrrabofKBELSRdRsmCGboyDGMJ15";
+
+        //Require user to login before using the app.
+        //Go to http://www.windowsazure.com/en-us/develop/mobile/tutorials/get-started-with-users-dotnet/ for Azure setup.
+        public const bool EnableMobileServiceAuth = false;
+
+        //Authentication provider that will be used to authenticate against.
+        public const MobileServiceAuthenticationProvider MobileServiceAuthProvider = MobileServiceAuthenticationProvider.Facebook;
 
         #endregion
 

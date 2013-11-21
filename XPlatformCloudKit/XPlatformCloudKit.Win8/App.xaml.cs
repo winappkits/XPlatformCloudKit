@@ -65,6 +65,7 @@ namespace XPlatformCloudKit.Win8
             ServiceLocator.NavigationService = new NavigationService();
             ServiceLocator.AzureMobileService = new AzureMobileService();
             ServiceLocator.ResourceFileService = new ResourceFileService();
+            ServiceLocator.AzureMobileServiceAuthenticator = new AzureMobileServiceAuthenticator();
 
             //Using MVVM Cross Container
             var iocProvider = MvxSimpleIoCContainer.Initialise();

@@ -78,15 +78,26 @@ namespace XPlatformCloudKit.Phone8
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            ServiceLocator.MessageService = new MessageService();
-            ServiceLocator.LiveTileNotifyService = new LiveTileNotifyService();
-            ServiceLocator.NavigationService = new XPlatformCloudKit.Services.NavigationService();
-            ServiceLocator.AzureMobileService = new AzureMobileService();
-            ServiceLocator.ResourceFileService = new ResourceFileService();
+            RootFrame.Navigating += RootFrame_Navigating;
+        }
+        private async void RootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            e.Cancel = true;
+            RootFrame.Navigating -= RootFrame_Navigating;
+            RootFrame.Dispatcher.BeginInvoke(async () =>
+            {
+                ServiceLocator.MessageService = new MessageService();
+                ServiceLocator.LiveTileNotifyService = new LiveTileNotifyService();
+                ServiceLocator.NavigationService = new XPlatformCloudKit.Services.NavigationService();
+                ServiceLocator.AzureMobileService = new AzureMobileService();
+                ServiceLocator.ResourceFileService = new ResourceFileService();
+                ServiceLocator.AzureMobileServiceAuthenticator = new AzureMobileServiceAuthenticator();
 
-            //Using MVVM Cross IOCContainer
-            var iocProvider = MvxSimpleIoCContainer.Initialise();
-            Mvx.RegisterSingleton<IMvxFileStore>(new MvxIsolatedStorageFileStore());
+                //Using MVVM Cross IOCContainer
+                MvxSimpleIoCContainer.Initialise();
+                Mvx.RegisterSingleton<IMvxFileStore>(new MvxIsolatedStorageFileStore());
+                Mvx.Resolve<IMvxAppStart>().Start();                                           
+            });
 
         }
 

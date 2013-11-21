@@ -21,7 +21,7 @@ using Cirrious.CrossCore;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Tasks;
 
-namespace XPlatformCloudKit
+namespace XPlatformCloudKit.Views
 {
     public partial class ItemsShowcaseView : MvxPhonePage
     {
@@ -31,7 +31,7 @@ namespace XPlatformCloudKit
         public ItemsShowcaseView()
         {
             InitializeComponent();
-            
+
             DataContext = new ItemsShowcaseViewModel();
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();

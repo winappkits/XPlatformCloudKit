@@ -1,6 +1,6 @@
 /*
-* LICENSE: https://raw.github.com/apimash/StarterKits/master/LicenseTerms-SampleApps%20.txt
-*/
+ * LICENSE: https://raw.github.com/apimash/StarterKits/master/LicenseTerms-SampleApps%20.txt
+ */
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Navigation;
 using XPlatformCloudKit.Common;
 using XPlatformCloudKit.Helpers;
 using XPlatformCloudKit.Models;
+using XPlatformCloudKit.Services;
 using XPlatformCloudKit.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -82,8 +83,10 @@ namespace XPlatformCloudKit.Views
                 ZoomedOutGroupGridView.ItemsSource = groupedItemsViewSource.View.CollectionGroups;
         }
 
-        void ItemsShowcaseView_Loaded(object sender, RoutedEventArgs e)
+        async void ItemsShowcaseView_Loaded(object sender, RoutedEventArgs e)
         {
+            if (AppSettings.EnableMobileServiceAuth) { await ServiceLocator.AzureMobileServiceAuthenticator.Authenticate(); }
+
             ((ItemsShowcaseViewModel)DataContext).PropertyChanged += vm_PropertyChanged; 
 
             //Cache loads so fast if called from constructor that property changed is not fired

@@ -125,11 +125,15 @@
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Helpers\DispatcherHelper.cs" />
     <Compile Include="Helpers\ItemClickCommand.cs" />
+    <Compile Include="Services\AzureMobileServiceAuthenticator.cs" />
     <Compile Include="Services\LiveTileNotifyService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ResourceFileService.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\InitView.xaml.cs">
+      <DependentUpon>InitView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ItemDescriptionView.xaml.cs">
       <DependentUpon>ItemDescriptionView.xaml</DependentUpon>
     </Compile>
@@ -168,6 +172,10 @@
     <Page Include="Common\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ItemDescriptionView.xaml">
       <SubType>Designer</SubType>

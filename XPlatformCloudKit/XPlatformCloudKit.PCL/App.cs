@@ -15,7 +15,7 @@ namespace XPlatformCloudKit
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ItemsShowcaseViewModel>();
+            RegisterAppStart<InitViewModel>();
         }
     }
 }

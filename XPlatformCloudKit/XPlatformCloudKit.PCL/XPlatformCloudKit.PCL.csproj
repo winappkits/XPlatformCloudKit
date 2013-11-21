@@ -55,6 +55,7 @@
     <Compile Include="SampleData\ItemsShowcaseSampleData.cs" />
     <Compile Include="DataServices\DataServiceFactory.cs" />
     <Compile Include="DataServices\IDataService.cs" />
+    <Compile Include="Services\IAzureMobileServiceAuthenticator.cs" />
     <Compile Include="Services\ILiveTileNotifyService.cs" />
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="DataServices\RssService.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="Services\IResourceFileService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Models\Item.cs" />
-    <Compile Include="ViewModels\FirstViewModel.cs" />
+    <Compile Include="ViewModels\InitViewModel.cs" />
     <Compile Include="ViewModels\ItemDescriptionViewModel.cs" />
     <Compile Include="ViewModels\ItemsShowcaseViewModel.cs" />
   </ItemGroup>

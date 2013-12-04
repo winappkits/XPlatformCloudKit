@@ -26,6 +26,7 @@ Video Tutorials
 * [Part 1 - Installing Prereqs from Dreamspark and Building for the First Time](http://www.youtube.com/watch?v=yKGPE95etYM)
 * [Part 2 - Use Youtube Playlists to create a Video App (Legend of Zelda - Video Strategy Guide)](http://www.youtube.com/watch?v=gnMgM1z0EHg)
 * [Part 3 - Use Local File to create an app with custom data (Microsoft Gaming - Information and News)](http://www.youtube.com/watch?v=hDEmKFSNQwI)
+* [Part 4 - Using the XPCK App Builder for quick app development](https://www.youtube.com/watch?v=bcMX1Q8ILaU)
 
 Getting Started
 ---------------

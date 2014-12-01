@@ -25,6 +25,10 @@ namespace XPlatformCloudKit
         //Timeframe in minutes to store data before making new request to Data Source
         //set to negative value to disable caching
         public static int CacheIntervalInMinutes = 60;
+
+        //Turn on and off group ordering
+        public static bool UseOrderByClause = true;
+        public static bool ByAscendingOrder = true;
         #endregion
 
         #region AzureMobileService Settings

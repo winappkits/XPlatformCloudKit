@@ -27,24 +27,42 @@ namespace XPlatformCloudKit.Helpers
         //returns a LINQ query by which the Groups are ordered in the ItemsShowcaseView
         public static IEnumerable<Group<Item>> BuildQuery(this List<Item> items)
         {
-            var query = items.GroupBy(i => i.Group);
+            var item = (IEnumerable<Item>)null;
+            var group = (IEnumerable<IGrouping<string, Item>>)null;
 
-            if (AppSettings.UseOrderByClause)
+            if (AppSettings.OrderByItem)
             {
-
-                if (AppSettings.ByAscendingOrder)
+                if (AppSettings.ItemByAscending)
                 {
-                    query = query.OrderBy(g => g.Key);
+                    item = items.OrderBy(i => i.Title);
                 }
                 else
                 {
-                    query = query.OrderByDescending(g => g.Key);
+                    item = items.OrderByDescending(i => i.Title);
+                }
+
+                group = item.GroupBy(i => i.Group);
+            }
+            else
+            {
+                group = items.GroupBy(i => i.Group);
+            }
+
+            if (AppSettings.OrderbyGroup)
+            {
+                if (AppSettings.GroupByAscending)
+                {
+                    group = group.OrderBy(g => g.Key);
+                }
+                else
+                {
+                    group = group.OrderByDescending(g => g.Key);
                 }
             }
 
-            var group = query.Select(g => new Group<Item>(g.Key, g));
+            var list = group.Select(g => new Group<Item>(g.Key, g));
 
-            return group;
+            return list;
         }
     }
 }

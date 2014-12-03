@@ -60,9 +60,9 @@ namespace XPlatformCloudKit.Helpers
                 }
             }
 
-            var list = group.Select(g => new Group<Item>(g.Key, g));
+            var query = group.Select(g => new Group<Item>(g.Key, g));
 
-            return list;
+            return query;
         }
     }
 }
